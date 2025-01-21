@@ -1,8 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "getFile.h"
-
-
+#include <chrono>
 
 int main(void) {
     std::cout << "Here are the words that you have to type. Have fun!" << std::endl << std::endl;
@@ -22,8 +21,17 @@ int main(void) {
         return -1;
     }
     
+    std::cout << "Press Enter to Start..." << std::endl;
+    std::cin.ignore();
+
+    auto start_time = std::chrono::high_resolution_clock::now();
+
     std::string inputText;
     std::getline(std::cin, inputText);
+
+    auto end_time = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed_time = end_time - start_time;
+
 
     auto displayit = displayText.begin();
     auto inputit = inputText.begin();
@@ -40,8 +48,9 @@ int main(void) {
         throw std::runtime_error("The strings do not match in length.");
     }
     
-    std::cout << "Success! The strings match." << std::endl;
+    std::cout << "Success! The strings match. And you typed it in " << elapsed_time.count() << "seconds." << std::endl;
 
     return 0;
 }
+
 
