@@ -2,3 +2,4 @@
 *.out
 typing_game
 *.o
+/.vscode
